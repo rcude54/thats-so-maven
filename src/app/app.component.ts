@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
 import axios from 'axios';
 
 
@@ -15,7 +13,7 @@ const rawHubPath = "/master/pom.xml";
 })
 export class AppComponent {
 
-  constructor(public http: HttpClient) {
+  constructor() {
   }
 
   public submitRepo(){
@@ -24,6 +22,7 @@ export class AppComponent {
     let repoURL = (<HTMLInputElement>document.getElementById('repo'))?.value;
     if(repoURL === '' || repoURL.indexOf('github') === -1){
       window.alert("Please input a Github repository URL");
+      return false;
     }
     //M offset is 1
     let repoPath = repoURL.slice(repoURL.indexOf('m/') + 1);
