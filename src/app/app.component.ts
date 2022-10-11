@@ -26,16 +26,19 @@ export class AppComponent {
     }
     //M offset is 1
     let repoPath = repoURL.slice(repoURL.indexOf('m/') + 1);
-    //console.log(`${rawHubHost}${repoPath}${rawHubPath}`);
+
     axios.get(`${rawHubHost}${repoPath}${rawHubPath}`)
-    .then((response) => {
-      soMaven?.setAttribute('style', 'display: block;')
-      notMaven?.setAttribute('style', 'display: none;')
-    })
-    .catch(function(err){
-      soMaven?.setAttribute('style', 'display: none;')
-      notMaven?.setAttribute('style', 'display: block;')
-    })
+      .then((resp) => {
+        document.getElementById('maven-maybe')?.setAttribute('style', 'display: none;');
+      })
+      .then((response) => {
+        soMaven?.setAttribute('style', 'display: block;')
+        notMaven?.setAttribute('style', 'display: none;')
+      })
+      .catch(function(err){
+        soMaven?.setAttribute('style', 'display: none;')
+        notMaven?.setAttribute('style', 'display: block;')
+      })
 
     return false;
   }
